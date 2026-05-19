@@ -182,7 +182,7 @@ function LandingScreen({onNext}){
         <div style={{display:"inline-flex",alignItems:"center",gap:6,background:`${T.teal}15`,border:`1px solid ${T.teal}30`,borderRadius:100,padding:"5px 12px",marginBottom:14}}>
           <Sparkles size={11} color={T.teal}/><span style={{fontSize:10,color:T.teal,fontFamily:F.d,fontWeight:700,letterSpacing:1}}>SMART NUTRITION</span>
         </div>
-        <h1 style={{fontFamily:F.d,fontWeight:800,fontSize:44,lineHeight:1,color:T.tx,margin:0,letterSpacing:-1.5}}>
+        <h1 style={{fontFamily:F.d,fontWeight:800,fontSize:36,lineHeight:1.05,color:T.tx,margin:0,letterSpacing:-1}}>
           Lari jadi<br/><span style={{background:`linear-gradient(90deg,${T.teal},${T.purple} 60%,${T.coral})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>terstruktur.</span>
         </h1>
         <p style={{color:T.tx2,fontSize:13,lineHeight:1.6,marginTop:14}}>Hitung kalori, susun meal plan, track progress,<br/>dan atur jadwal makan — semua dipersonalisasi.</p>
@@ -209,7 +209,7 @@ function StepHdr({step,title,sub,onBack}){
     <div style={{display:"flex",gap:4,marginBottom:16}}>{[1,2,3].map(n=><div key={n} style={{flex:1,height:4,borderRadius:2,background:n<=step?`linear-gradient(90deg,${T.teal},${T.purple})`:T.s}}/>)}</div>
     <div style={{display:"flex",alignItems:"center",gap:12}}>
       {onBack&&<button onClick={onBack} style={{background:T.s,border:`1px solid ${T.b}`,borderRadius:10,padding:10,cursor:"pointer",color:T.tx2,display:"flex"}}><ChevronLeft size={18}/></button>}
-      <div><div style={{fontSize:10,color:T.teal,letterSpacing:2,fontFamily:F.d,fontWeight:700}}>LANGKAH {step} / 3</div><div style={{fontFamily:F.d,fontWeight:800,fontSize:22,color:T.tx,marginTop:2}}>{title}</div><div style={{fontSize:12,color:T.tx3,marginTop:2}}>{sub}</div></div>
+      <div><div style={{fontSize:10,color:T.teal,letterSpacing:2,fontFamily:F.d,fontWeight:700}}>LANGKAH {step} / 3</div><div style={{fontFamily:F.d,fontWeight:800,fontSize:20,color:T.tx,marginTop:2}}>{title}</div><div style={{fontSize:11,color:T.tx3,marginTop:2}}>{sub}</div></div>
     </div>
   </div>);
 }
@@ -236,7 +236,7 @@ function Step2({data:d,setData:sd,onBack,onNext}){
   return(<div style={S.scr}><SBar/><StepHdr step={2} title="Fitness Level" sub="Tentukan level dan aktivitas harian kamu" onBack={onBack}/>
     <div style={{flex:1,padding:"16px 20px",overflowY:"auto",display:"flex",flexDirection:"column",gap:14}}>
       <div><label style={S.lbl}>Level Fitness</label><div style={{display:"flex",flexDirection:"column",gap:8}}>
-        {[{v:"beginner",l:"Pemula",dd:"Baru mulai atau jarang berolahraga"},{v:"intermediate",l:"Menengah",dd:"Rutin olahraga, ingin meningkatkan performa"},{v:"advanced",l:"Lanjutan",dd:"Atlet atau berpengalaman, ingin performa maksimal"}].map(l=>{const a=d.fitnessLevel===l.v;return(<button key={l.v} onClick={()=>sd({...d,fitnessLevel:l.v})} style={{display:"flex",alignItems:"center",gap:12,padding:14,borderRadius:14,border:`1px solid ${a?T.teal:T.b}`,background:a?`linear-gradient(135deg,${T.teal},${T.purple}aa)`:T.s,color:a?T.bg:T.tx,cursor:"pointer",textAlign:"left",width:"100%",transition:"all .2s"}}><div style={{width:36,height:36,borderRadius:10,background:a?"rgba(0,0,0,.15)":"rgba(255,255,255,.04)",display:"flex",alignItems:"center",justifyContent:"center"}}><Activity size={16}/></div><div style={{flex:1}}><div style={{fontFamily:F.d,fontWeight:800,fontSize:14}}>{l.l}</div><div style={{fontSize:11,opacity:.7}}>{l.dd}</div></div>{a&&<CheckCircle size={16}/>}</button>)})}
+        {[{v:"beginner",l:"Pemula",dd:"Baru mulai atau jarang olahraga"},{v:"intermediate",l:"Menengah",dd:"Rutin olahraga, ingin meningkat"},{v:"advanced",l:"Lanjutan",dd:"Berpengalaman, performa maksimal"}].map(l=>{const a=d.fitnessLevel===l.v;return(<button key={l.v} onClick={()=>sd({...d,fitnessLevel:l.v})} style={{display:"flex",alignItems:"center",gap:10,padding:12,borderRadius:14,border:`1px solid ${a?T.teal:T.b}`,background:a?`linear-gradient(135deg,${T.teal},${T.purple}aa)`:T.s,color:a?T.bg:T.tx,cursor:"pointer",textAlign:"left",width:"100%",transition:"all .2s"}}><div style={{width:34,height:34,borderRadius:10,background:a?"rgba(0,0,0,.15)":"rgba(255,255,255,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Activity size={15}/></div><div style={{flex:1,minWidth:0}}><div style={{fontFamily:F.d,fontWeight:800,fontSize:13}}>{l.l}</div><div style={{fontSize:10,opacity:.7}}>{l.dd}</div></div>{a&&<CheckCircle size={15}/>}</button>)})}
       </div></div>
       <div><label style={S.lbl}>Aktivitas Harian</label><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
         {[{v:"sedentary",l:"Sedentary",d:"Jarang bergerak"},{v:"light",l:"Ringan",d:"1–3x per minggu"},{v:"moderate",l:"Moderat",d:"3–5x per minggu"},{v:"active",l:"Aktif",d:"6–7x per minggu"}].map(a=><button key={a.v} onClick={()=>sd({...d,activityLevel:a.v})} style={{...S.chip(d.activityLevel===a.v),padding:"12px 10px",textAlign:"left",display:"flex",flexDirection:"column",gap:3}}><span style={{fontSize:12,fontWeight:700}}>{a.l}</span><span style={{fontSize:10,opacity:.6}}>{a.d}</span></button>)}
@@ -249,8 +249,8 @@ function Step3({data:d,setData:sd,onBack,onNext}){
   const cg=calcGoal(calcTDEE(calcBMR(d),d.activityLevel),d.goal);
   return(<div style={S.scr}><SBar/><StepHdr step={3} title="Tujuan" sub="Pilih target yang ingin dicapai" onBack={onBack}/>
     <div style={{flex:1,padding:"16px 20px",overflowY:"auto",display:"flex",flexDirection:"column",gap:14}}>
-      <div><label style={S.lbl}>Target Tubuh</label><div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8}}>
-        {[{v:"lose",l:"Penurunan",d:"Defisit kalori",c:T.coral},{v:"maintain",l:"Maintenance",d:"Jaga berat ideal",c:T.green},{v:"gain",l:"Penambahan",d:"Surplus kalori",c:T.blue}].map(g=>{const a=d.goal===g.v;return(<button key={g.v} onClick={()=>sd({...d,goal:g.v})} style={{padding:"14px 6px",borderRadius:14,border:`1.5px solid ${a?g.c:T.b}`,background:a?`${g.c}22`:T.s,cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4}}><div style={{width:28,height:28,borderRadius:"50%",background:`${g.c}25`,border:`1px solid ${g.c}50`,display:"flex",alignItems:"center",justifyContent:"center"}}><Target size={12} color={g.c}/></div><span style={{fontFamily:F.d,fontWeight:800,fontSize:11,color:a?g.c:T.tx}}>{g.l}</span><span style={{fontSize:9,color:T.tx3}}>{g.d}</span></button>)})}
+      <div><label style={S.lbl}>Target Tubuh</label><div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
+        {[{v:"lose",l:"Defisit",d:"Turun berat",c:T.coral},{v:"maintain",l:"Maintain",d:"Jaga berat",c:T.green},{v:"gain",l:"Surplus",d:"Naik massa",c:T.blue}].map(g=>{const a=d.goal===g.v;return(<button key={g.v} onClick={()=>sd({...d,goal:g.v})} style={{padding:"12px 4px",borderRadius:12,border:`1.5px solid ${a?g.c:T.b}`,background:a?`${g.c}22`:T.s,cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3,overflow:"hidden"}}><div style={{width:24,height:24,borderRadius:"50%",background:`${g.c}25`,border:`1px solid ${g.c}50`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Target size={10} color={g.c}/></div><span style={{fontFamily:F.d,fontWeight:800,fontSize:10,color:a?g.c:T.tx,textAlign:"center"}}>{g.l}</span><span style={{fontSize:8,color:T.tx3,textAlign:"center"}}>{g.d}</span></button>)})}
       </div></div>
       <div><label style={S.lbl}>Target Lari</label><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
         {[{v:"5k",l:"Finish 5K"},{v:"10k",l:"Target 10K"},{v:"halfMarathon",l:"Half Marathon"},{v:"fitness",l:"General Fitness"}].map(g=>{const a=d.runGoal===g.v;return(<button key={g.v} onClick={()=>sd({...d,runGoal:g.v})} style={{...S.chip(a),padding:"12px",textAlign:"center"}}>{g.l}</button>)})}
@@ -301,7 +301,7 @@ function DashHome({data:d,foodLog,hydration,setHydration,onTab}){
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
           <div>
             <div style={{fontSize:10,color:T.tx3,fontFamily:F.d,fontWeight:700,letterSpacing:1.5}}>SISA KALORI HARI INI</div>
-            <div style={{fontFamily:F.d,fontWeight:800,fontSize:40,color:remaining>0?T.green:T.red,lineHeight:1,marginTop:4}}>{remaining>0?remaining.toLocaleString():0}</div>
+            <div style={{fontFamily:F.d,fontWeight:800,fontSize:32,color:remaining>0?T.green:T.red,lineHeight:1,marginTop:4}}>{remaining>0?remaining.toLocaleString():0}</div>
             <div style={{fontSize:11,color:T.tx3,marginTop:4}}>dari {target.toLocaleString()} kcal target</div>
           </div>
           <div style={{textAlign:"right"}}><div style={{fontFamily:F.d,fontWeight:800,fontSize:18,color:T.coral}}>{consumed.toLocaleString()}</div><div style={{fontSize:10,color:T.tx3}}>dikonsumsi</div></div>
