@@ -364,8 +364,8 @@ function DashHome({data:d,foodLog,hydration,setHydration,onTab}){
 }
 
 /* ═══════════ TAB 2: MAKAN ═══════════ */
-function DashMakan({data:d,foodLog,setFoodLog,mealPlan,setMealPlan,onTab}){
-  const [search,setSearch]=useState("");const [cat,setCat]=useState("Semua");const [view,setView]=useState("log");
+function DashMakan({data:d,foodLog,setFoodLog,mealPlan,setMealPlan,onTab,initialView}){
+  const [search,setSearch]=useState("");const [cat,setCat]=useState("Semua");const [view,setView]=useState(initialView||"log");
   const target=calcGoal(calcTDEE(calcBMR(d),d.activityLevel),d.goal);
   const consumed=foodLog.reduce((s,f)=>s+f.cal,0);
   const filtered=FOOD_DB.filter(f=>(cat==="Semua"||f.cat===cat)&&(search===""||f.name.toLowerCase().includes(search.toLowerCase())));
@@ -597,7 +597,10 @@ function renderScreen(id,d,sd,nav,inter,ex={}){
     case"step2":return<Step2 data={d} setData={s} onBack={()=>n("step1")} onNext={()=>n("step3")}/>;
     case"step3":return<Step3 data={d} setData={s} onBack={()=>n("step2")} onNext={()=>n("home")}/>;
     case"home":return<DashHome data={d} foodLog={ex.foodLog||[]} hydration={ex.hydration||0} setHydration={ex.setHydration||no} onTab={n}/>;
-    case"makan":return<DashMakan data={d} foodLog={ex.foodLog||[]} setFoodLog={ex.setFoodLog||no} mealPlan={ex.mealPlan} setMealPlan={ex.setMealPlan||no} onTab={n}/>;
+    case"makan":return<DashMakan data={d} foodLog={ex.foodLog||[]} setFoodLog={ex.setFoodLog||no} mealPlan={ex.mealPlan} setMealPlan={ex.setMealPlan||no} onTab={n} initialView="log"/>;
+    case"search":return<DashMakan data={d} foodLog={ex.foodLog||[]} setFoodLog={ex.setFoodLog||no} mealPlan={ex.mealPlan} setMealPlan={ex.setMealPlan||no} onTab={n} initialView="search"/>;
+    case"plan":return<DashMakan data={d} foodLog={ex.foodLog||[]} setFoodLog={ex.setFoodLog||no} mealPlan={null} setMealPlan={ex.setMealPlan||no} onTab={n} initialView="plan"/>;
+    case"plan-generated":return<DashMakan data={d} foodLog={ex.foodLog||[]} setFoodLog={ex.setFoodLog||no} mealPlan={ex.mealPlan||generateMealPlan(calcGoal(calcTDEE(calcBMR(d),d.activityLevel),d.goal))} setMealPlan={ex.setMealPlan||no} onTab={n} initialView="plan"/>;
     case"latihan":return<DashLatihan data={d} onTab={n}/>;
     case"progress":return<DashProgress data={d} foodLog={ex.foodLog||[]} weightHistory={ex.weightHistory||[{date:"Awal",weight:65}]} setWeightHistory={ex.setWeightHistory||no} streak={ex.streak||1} hydration={ex.hydration||0} mealPlan={ex.mealPlan} onTab={n}/>;
     default:return<LandingScreen onNext={()=>n("step1")}/>;
@@ -700,17 +703,14 @@ export default function RunSync(){
   },[]);
 
   if(captureId){
-    // Generate meal plan for capture if needed
     const capExtra={...extra};
-    if(captureId==="plan"&&!mealPlan){
+    if((captureId==="plan-generated")&&!mealPlan){
       capExtra.mealPlan=generateMealPlan(calcGoal(calcTDEE(calcBMR(data),data.activityLevel),data.goal));
     }
-    const screenId=captureId==="plan"?"makan":captureId==="search"?"makan":captureId;
-    // For makan sub-views, set initial view state via wrapper
     return(
       <div style={{display:"flex",justifyContent:"center",alignItems:"center",minHeight:"100vh",background:"#050507"}}>
         <div style={{width:390,height:844,overflow:"hidden",position:"relative",background:T.bg}}>
-          {renderScreen(screenId,data,setData,()=>{},true,capExtra)}
+          {renderScreen(captureId,data,setData,()=>{},true,capExtra)}
         </div>
       </div>
     );
