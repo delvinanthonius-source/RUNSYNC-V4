@@ -83,22 +83,130 @@ const FOOD_CATS=["Semua","Karbohidrat","Protein","Sayuran","Snack","Minuman","Wa
 /* ═══════════ TRAINING SESSIONS ═══════════ */
 const TRAIN={
   beginner:[
-    {day:"Senin",type:"Run/Walk",dur:"20 min",detail:"1 min lari, 2 min jalan — ulangi 6 kali",int:"Rendah"},
-    {day:"Rabu",type:"Rest Aktif",dur:"30 min",detail:"Jalan santai atau stretching",int:"Sangat Rendah"},
-    {day:"Jumat",type:"Run/Walk",dur:"25 min",detail:"2 min lari, 2 min jalan — ulangi 6 kali",int:"Rendah"},
-    {day:"Minggu",type:"Long Walk",dur:"35 min",detail:"Jalan cepat konstan",int:"Rendah"},
+    {
+      day:"Senin",type:"Run/Walk",dur:"25 min",
+      detail:"2 min jalan · 1 min lari × 6 putaran",
+      int:"Rendah",
+      steps:["5 menit jalan santai (warmup)","1 menit lari pelan + 2 menit jalan × 6 putaran","5 menit jalan pelan (cooldown)","Stretch: betis, paha depan, punggung 5 menit"],
+      rpe:"Kamu harus masih bisa ngobrol sambil lari. Kalau tidak bisa bicara → pelankan pace.",
+      nafas:"Tarik nafas 3 langkah, hembuskan 3 langkah. Bernafas lewat hidung & mulut.",
+      warning:"Berhenti jika: nyeri di lutut, dada sesak, atau pusing. Itu normal di minggu awal.",
+      milestone:"Setelah 2 minggu, kamu akan bisa lari 5 menit non-stop!"
+    },
+    {
+      day:"Rabu",type:"Rest Aktif",dur:"20 min",
+      detail:"Jalan santai atau stretching ringan",
+      int:"Sangat Rendah",
+      steps:["Jalan 15-20 menit dengan pace sangat santai","ATAU: yoga/stretching 20 menit di rumah","Fokus pada pemulihan otot kaki","Minum air yang cukup sepanjang hari"],
+      rpe:"Hari ini bukan hari latihan keras. Biarkan otot pulih.",
+      nafas:"Bernafas normal, tidak ada target pace.",
+      warning:"Jangan skip hari ini — pemulihan sama pentingnya dengan latihan.",
+      milestone:"Rest day membantu otot kamu tumbuh lebih kuat."
+    },
+    {
+      day:"Jumat",type:"Run/Walk",dur:"28 min",
+      detail:"1 min lari · 1 min jalan × 8 putaran",
+      int:"Rendah",
+      steps:["5 menit jalan santai (warmup)","1 menit lari + 1 menit jalan × 8 putaran","5 menit jalan pelan (cooldown)","Stretch: 5-10 menit fokus betis & paha"],
+      rpe:"Lebih cepat dari Senin? Boleh, tapi tetap bisa ngobrol. Jangan terlalu memaksakan.",
+      nafas:"Coba irama: 2 langkah tarik nafas, 2 langkah hembuskan.",
+      warning:"Kalau kaki terasa berat sejak awal → kurangi putaran menjadi 6x saja.",
+      milestone:"Kamu sudah lari 2x minggu ini. Tubuh mulai beradaptasi!"
+    },
+    {
+      day:"Minggu",type:"Long Walk+Jog",dur:"30 min",
+      detail:"Jalan cepat 20 min + lari 10 min total",
+      int:"Rendah",
+      steps:["Jalan cepat 10 menit (warmup aktif)","Lari 2 menit + jalan 3 menit × 2","Jalan cepat 10 menit","Stretch total body 10 menit"],
+      rpe:"Hari ini santai. Nikmati udara pagi. Tidak ada target waktu.",
+      nafas:"Bernafas bebas dan natural. Fokus pada menikmati perjalanan.",
+      warning:"Gunakan sepatu yang nyaman. Hindari permukaan yang terlalu keras.",
+      milestone:"1 minggu pertama selesai! Kamu luar biasa."
+    },
   ],
   intermediate:[
-    {day:"Senin",type:"Easy Run",dur:"30 min",detail:"Pace santai, bisa ngobrol",int:"Sedang"},
-    {day:"Rabu",type:"Interval",dur:"35 min",detail:"8x400m cepat + warmup/cooldown",int:"Tinggi"},
-    {day:"Jumat",type:"Tempo Run",dur:"30 min",detail:"15 min tempo, 5 min easy",int:"Sedang-Tinggi"},
-    {day:"Minggu",type:"Long Run",dur:"50 min",detail:"Pace konstan, nyaman",int:"Sedang"},
+    {
+      day:"Senin",type:"Easy Run",dur:"30 min",
+      detail:"Lari kontinyu dengan pace santai",
+      int:"Sedang",
+      steps:["5 menit jalan/lari pelan (warmup)","20 menit lari dengan pace konstan — target: 6-7 min/km","5 menit lari sangat pelan (cooldown)","Stretch dinamis 5 menit"],
+      rpe:"Pace 'bisa ngobrol' — bisa mengucapkan kalimat lengkap tanpa tersengal.",
+      nafas:"Coba belly breathing — perut naik turun, bukan dada.",
+      warning:"Kalau HR >80% max → pelankan. Ini bukan latihan keras.",
+      milestone:"Easy run membangun aerobic base yang kuat untuk race day."
+    },
+    {
+      day:"Rabu",type:"Interval",dur:"35 min",
+      detail:"8×400m cepat + warmup/cooldown",
+      int:"Tinggi",
+      steps:["10 menit warmup lari pelan","400m lari cepat (pace race/lebih cepat)","90 detik jalan/jogging recovery","Ulangi 8 kali","10 menit cooldown lari pelan + stretch"],
+      rpe:"Interval harus terasa berat — skala 8/10. Tidak bisa ngobrol saat interval.",
+      nafas:"Saat interval: nafas cepat dan dalam. Saat recovery: kendalikan nafas.",
+      warning:"Skip jika kaki terasa sangat berat atau ada nyeri. Recovery > satu sesi.",
+      milestone:"Interval meningkatkan VO2max dan kecepatan race kamu."
+    },
+    {
+      day:"Jumat",type:"Tempo Run",dur:"30 min",
+      detail:"15 menit tempo + 5 menit easy",
+      int:"Sedang-Tinggi",
+      steps:["5 menit warmup lari pelan","15 menit tempo pace — 'comfortably hard', skala 7/10","5 menit lari easy pace","5 menit cooldown + stretch"],
+      rpe:"Tempo = bisa ngucapkan satu kata, tidak kalimat. Terasa berat tapi terkontrol.",
+      nafas:"Ritme nafas pendek dan teratur. 2 langkah tarik, 2 langkah hembuskan.",
+      warning:"Tempo bukan sprint. Kalau terlalu cepat, tidak akan bisa bertahan 15 menit.",
+      milestone:"Tempo run meningkatkan lactate threshold — kamu bisa lari lebih cepat lebih lama."
+    },
+    {
+      day:"Minggu",type:"Long Run",dur:"50 min",
+      detail:"Lari konstan dengan pace nyaman",
+      int:"Sedang",
+      steps:["5 menit warmup jalan","40 menit lari dengan pace sangat santai (lebih pelan dari easy run)","5 menit cooldown jalan","Stretch menyeluruh 10-15 menit"],
+      rpe:"Long run = pace paling santai. Bisa bernyanyi kalau mau. Ini bukan balapan.",
+      nafas:"Natural dan rileks. Fokus pada consistency, bukan kecepatan.",
+      warning:"Makan karbohidrat 2 jam sebelum. Bawa air atau lari di rute dengan air.",
+      milestone:"Long run membangun mental strength dan endurance untuk race."
+    },
   ],
   advanced:[
-    {day:"Senin",type:"Recovery",dur:"40 min",detail:"Zone 2, sangat ringan",int:"Rendah"},
-    {day:"Selasa",type:"Speed Work",dur:"50 min",detail:"12x400m @ 5K pace",int:"Sangat Tinggi"},
-    {day:"Kamis",type:"Tempo Run",dur:"50 min",detail:"20 min @ threshold pace",int:"Tinggi"},
-    {day:"Sabtu",type:"Long Run",dur:"90 min",detail:"Pace percakapan, aerobik",int:"Sedang"},
+    {
+      day:"Senin",type:"Recovery Run",dur:"40 min",
+      detail:"Zone 2 — sangat ringan",
+      int:"Rendah",
+      steps:["Langsung mulai lari sangat pelan — HR Zone 1-2 max","40 menit konstan, pace SANGAT santai (lebih lambat dari biasa)","Stretch dinamis + foam rolling setelah selesai"],
+      rpe:"Zone 2: skala 4/10. Bisa bernyanyi. HR ~120-140 bpm.",
+      nafas:"Bernafas sepenuhnya lewat hidung jika bisa — ini indikator Zone 2.",
+      warning:"Jangan lebih keras dari ini. Recovery run yang terlalu cepat menghambat adaptasi.",
+      milestone:"Recovery run flush out lactate dan siapkan tubuh untuk sesi keras berikutnya."
+    },
+    {
+      day:"Selasa",type:"Speed Work",dur:"50 min",
+      detail:"12×400m @ 5K pace",
+      int:"Sangat Tinggi",
+      steps:["10 menit warmup termasuk drills (high knees, butt kicks)","12×400m @ 5K target race pace","60-90 detik recovery walk/jog antar set","10 menit cooldown + stretch mendalam"],
+      rpe:"Interval harus terasa 9/10. Pace harus konsisten — bukan sprint dan melambat.",
+      nafas:"Controlled chaos — pendek dan cepat. Fokus pada form, bukan nafas.",
+      warning:"Jika pace drop >10 detik di set akhir → kurangi jadi 10×400m.",
+      milestone:"12×400m dengan pace konsisten = kesiapan race yang sesungguhnya."
+    },
+    {
+      day:"Kamis",type:"Tempo Run",dur:"50 min",
+      detail:"20 menit @ threshold pace",
+      int:"Tinggi",
+      steps:["10 menit warmup progresif","20 menit threshold pace — skala 8/10 effort","5 menit float (sedikit lebih lambat dari tempo)","15 menit cooldown + stretch"],
+      rpe:"Threshold: bisa ngucapkan 3-4 kata tapi tidak kalimat. HR ~85-90% max.",
+      nafas:"2-2 rhythm: 2 langkah tarik, 2 hembuskan. Konsisten sepanjang tempo.",
+      warning:"Threshold run perlu recovery 48 jam. Jangan tambah volume minggu ini.",
+      milestone:"Threshold meningkatkan pace marathon dan half marathon secara signifikan."
+    },
+    {
+      day:"Sabtu",type:"Long Run",dur:"90 min",
+      detail:"Aerobic pace — percakapan konstan",
+      int:"Sedang",
+      steps:["5 menit warmup walk","80 menit long run @ conversational pace","5 menit cooldown walk","Foam rolling + stretch 15-20 menit post-run"],
+      rpe:"Long run = pace paling santai di minggu ini. HR Zone 2-3.",
+      nafas:"Bisa ngobrol penuh. Kalau tidak bisa → terlalu cepat, pelankan.",
+      warning:"Nutrition: gel/bar setiap 45 menit untuk run >60 menit. Hidrasi tiap 20 menit.",
+      milestone:"90 menit long run = fondasi untuk race apapun dari 10K hingga marathon."
+    },
   ]
 };
 const INT_COL={"Sangat Rendah":"#a3e635","Rendah":"#4ade80","Sedang":"#facc15","Sedang-Tinggi":"#fb923c","Tinggi":"#f87171","Sangat Tinggi":"#e879f9"};
@@ -448,7 +556,9 @@ function DashMakan({data:d,foodLog,setFoodLog,mealPlan,setMealPlan,onTab,initial
 
 /* ═══════════ TAB 3: LATIHAN ═══════════ */
 function DashLatihan({data:d,onTab}){
-  const [done,setDone]=useState({});const sess=TRAIN[d.fitnessLevel]||TRAIN.intermediate;
+  const [done,setDone]=useState({});
+  const [expanded,setExpanded]=useState(null);
+  const sess=TRAIN[d.fitnessLevel]||TRAIN.intermediate;
   return(<div style={S.scr}><SBar/><DashHdr data={d} accent={T.purple}/><TabBar active="latihan" onTab={onTab}/>
     <div style={{flex:1,overflowY:"auto",padding:"12px 14px 24px",display:"flex",flexDirection:"column",gap:10}}>
       <div style={S.card}>
@@ -458,34 +568,87 @@ function DashLatihan({data:d,onTab}){
             {d.fitnessLevel==="beginner"?"Pemula":d.fitnessLevel==="advanced"?"Lanjutan":"Menengah"}
           </div>
         </div>
-      </div>
-      {sess.map((s,i)=>{const dn=done[i];return(<div key={i} style={{...S.card,borderColor:dn?`${T.green}40`:T.b,background:dn?`${T.green}08`:T.s}}>
-        <div style={{display:"flex",alignItems:"flex-start",gap:10}}>
-          <div style={{width:44,height:44,borderRadius:12,background:`${INT_COL[s.int]}18`,border:`1px solid ${INT_COL[s.int]}40`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-            <Activity size={18} color={INT_COL[s.int]}/>
-          </div>
-          <div style={{flex:1,minWidth:0}}>
-            <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
-              <span style={{fontFamily:F.d,fontWeight:800,fontSize:13}}>{s.day}</span>
-              <span style={{fontSize:11,color:T.teal}}>{s.type}</span>
-              {dn&&<span style={{fontSize:10,color:T.green}}>Selesai</span>}
-            </div>
-            <div style={{fontSize:10,color:T.tx2,marginTop:3}}>{s.detail}</div>
-            <div style={{display:"flex",gap:4,marginTop:6}}>
-              <span style={{fontSize:9,color:T.tx3,background:T.s,padding:"2px 8px",borderRadius:20,border:`1px solid ${T.b}`}}>{s.dur}</span>
-              <span style={{fontSize:9,color:INT_COL[s.int],background:`${INT_COL[s.int]}20`,padding:"2px 8px",borderRadius:20}}>{s.int}</span>
-            </div>
-          </div>
-          <button onClick={()=>setDone({...done,[i]:!dn})} style={{background:dn?`${T.green}25`:T.s,border:`1px solid ${dn?T.green:T.b}`,borderRadius:10,padding:8,cursor:"pointer",color:dn?T.green:T.tx4}}>
-            {dn?<CheckCircle size={16}/>:<Play size={14}/>}
-          </button>
+        <div style={{fontSize:11,color:T.tx3,marginTop:6}}>
+          {d.fitnessLevel==="beginner"?"Program 4 minggu untuk mulai lari dari nol":d.fitnessLevel==="advanced"?"Program high-performance untuk atlet":"Program peningkatan performa lari"}
         </div>
-      </div>)})}
+      </div>
+
+      {sess.map((s,i)=>{
+        const dn=done[i];const isExp=expanded===i;
+        return(<div key={i} style={{...S.card,borderColor:dn?`${T.green}40`:T.b,background:dn?`${T.green}08`:T.s}}>
+          {/* Header row */}
+          <div style={{display:"flex",alignItems:"flex-start",gap:10}}>
+            <div style={{width:44,height:44,borderRadius:12,background:`${INT_COL[s.int]}18`,border:`1px solid ${INT_COL[s.int]}40`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+              <Activity size={18} color={INT_COL[s.int]}/>
+            </div>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                <span style={{fontFamily:F.d,fontWeight:800,fontSize:13}}>{s.day}</span>
+                <span style={{fontSize:11,color:T.teal}}>{s.type}</span>
+                {dn&&<span style={{fontSize:10,color:T.green}}>Selesai</span>}
+              </div>
+              <div style={{fontSize:10,color:T.tx2,marginTop:2}}>{s.detail}</div>
+              <div style={{display:"flex",gap:4,marginTop:6,flexWrap:"wrap"}}>
+                <span style={{fontSize:9,color:T.tx3,background:T.s,padding:"2px 8px",borderRadius:20,border:`1px solid ${T.b}`}}>{s.dur}</span>
+                <span style={{fontSize:9,color:INT_COL[s.int],background:`${INT_COL[s.int]}20`,padding:"2px 8px",borderRadius:20}}>{s.int}</span>
+              </div>
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:6,alignItems:"flex-end"}}>
+              <button onClick={()=>setDone({...done,[i]:!dn})} style={{background:dn?`${T.green}25`:T.s,border:`1px solid ${dn?T.green:T.b}`,borderRadius:10,padding:8,cursor:"pointer",color:dn?T.green:T.tx4}}>
+                {dn?<CheckCircle size={16}/>:<Play size={14}/>}
+              </button>
+              <button onClick={()=>setExpanded(isExp?null:i)} style={{background:T.s,border:`1px solid ${T.b}`,borderRadius:10,padding:"4px 8px",cursor:"pointer",color:T.tx3,fontSize:9,fontFamily:F.d,fontWeight:700}}>
+                {isExp?"Tutup":"Detail"}
+              </button>
+            </div>
+          </div>
+
+          {/* Expanded detail */}
+          {isExp&&<div style={{marginTop:12,paddingTop:12,borderTop:`1px solid ${T.b}`,display:"flex",flexDirection:"column",gap:10}}>
+            {/* Steps */}
+            <div>
+              <div style={{fontSize:10,color:T.teal,fontFamily:F.d,fontWeight:700,letterSpacing:1,marginBottom:6}}>LANGKAH-LANGKAH</div>
+              {s.steps.map((step,si)=>(
+                <div key={si} style={{display:"flex",gap:8,marginBottom:5}}>
+                  <div style={{width:18,height:18,borderRadius:"50%",background:`${T.teal}20`,border:`1px solid ${T.teal}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:9,color:T.teal,fontFamily:F.d,fontWeight:700,flexShrink:0}}>{si+1}</div>
+                  <span style={{fontSize:11,color:T.tx2,lineHeight:1.4}}>{step}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* RPE */}
+            <div style={{background:`${T.amber}10`,border:`1px solid ${T.amber}25`,borderRadius:10,padding:"8px 10px"}}>
+              <div style={{fontSize:10,color:T.amber,fontFamily:F.d,fontWeight:700,letterSpacing:1,marginBottom:4}}>SKALA USAHA (RPE)</div>
+              <div style={{fontSize:11,color:T.tx2,lineHeight:1.5}}>{s.rpe}</div>
+            </div>
+
+            {/* Breathing */}
+            <div style={{background:`${T.blue}10`,border:`1px solid ${T.blue}25`,borderRadius:10,padding:"8px 10px"}}>
+              <div style={{fontSize:10,color:T.blue,fontFamily:F.d,fontWeight:700,letterSpacing:1,marginBottom:4}}>TEKNIK NAFAS</div>
+              <div style={{fontSize:11,color:T.tx2,lineHeight:1.5}}>{s.nafas}</div>
+            </div>
+
+            {/* Warning */}
+            <div style={{background:`${T.coral}10`,border:`1px solid ${T.coral}25`,borderRadius:10,padding:"8px 10px"}}>
+              <div style={{fontSize:10,color:T.coral,fontFamily:F.d,fontWeight:700,letterSpacing:1,marginBottom:4}}>KAPAN HARUS BERHENTI</div>
+              <div style={{fontSize:11,color:T.tx2,lineHeight:1.5}}>{s.warning}</div>
+            </div>
+
+            {/* Milestone */}
+            <div style={{background:`${T.green}10`,border:`1px solid ${T.green}25`,borderRadius:10,padding:"8px 10px"}}>
+              <div style={{fontSize:10,color:T.green,fontFamily:F.d,fontWeight:700,letterSpacing:1,marginBottom:4}}>MANFAAT SESI INI</div>
+              <div style={{fontSize:11,color:T.tx2,lineHeight:1.5}}>{s.milestone}</div>
+            </div>
+          </div>}
+        </div>);})}
+
+      {/* Tips */}
       <div style={{...S.card,background:`${T.amber}10`,border:`1px solid ${T.amber}30`}}>
-        <div style={S.ct}><Zap size={14} color={T.amber}/> Tips</div>
-        <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}}>
-          {["Warmup 5–10 menit sebelum setiap sesi","Ikuti prinsip 80/20: 80% ringan, 20% intense","Istirahat jika mengalami cedera atau kelelahan berlebih","Pastikan tidur 7–9 jam untuk pemulihan optimal"].map((t,i)=>
-            <div key={i} style={{fontSize:10,color:T.tx2}}>• {t}</div>)}
+        <div style={S.ct}><Zap size={14} color={T.amber}/> Tips Umum</div>
+        <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}}>
+          {["Warmup 5–10 menit sebelum setiap sesi","Ikuti prinsip 80/20: 80% ringan, 20% intense","Istirahat jika mengalami cedera atau kelelahan berlebih","Pastikan tidur 7–9 jam untuk pemulihan optimal"].map((t,i)=>(
+            <div key={i} style={{fontSize:10,color:T.tx2}}>• {t}</div>
+          ))}
         </div>
       </div>
     </div><HI/></div>);
